@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Clicking Game</title>
+    <style>
+         body {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #game-container {
+            text-align: center;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
+        }
+
+        #score {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        @keyframes borderAnimation {
+            0% {
+                border-width: 5px;
+            }
+            50% {
+                border-width: 15px;
+            }
+            100% {
+                border-width: 5px;
+            }
+        }
+
+        #game-container {
+            animation: borderAnimation 2s infinite;
+            border: 5px solid #4CAF50;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        #rebirth-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+        }
+
+        #rebirth-popup {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #rebirth-popup button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #rebirth-popup button:hover {
+            transform: scale(1.1);
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Futuristic Clicking Game</h1>
+        <button id="clickButton" onclick="incrementScore()">Click Me!</button>
+        <p id="score">Score: 0</p>
+    </div>
+
+    <div id="rebirth-container">
+        <div id="rebirth-popup">
+            <p>Do you want to rebirth?</p>
+            <button onclick="rebirthYes()">Yes</button>
+            <button onclick="rebirthNo()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let multiplier = 1;
+        let rebirthPrice = 50;
+
+        function incrementScore() {
+            score += multiplier;
+            document.getElementById('score').innerHTML = 'Score: ' + score;
+
+            if (score >= rebirthPrice) {
+                showRebirthPopup();
+            }
+        }
+
+        function showRebirthPopup() {
+            document.getElementById('rebirth-container').style.display = 'flex';
+        }
+
+        function hideRebirthPopup() {
+            document.getElementById('rebirth-container').style.display = 'none';
+        }
+
+        function rebirthYes() {
+            score = 0;
+            multiplier++;
+            rebirthPrice *= 2;
+            document.getElementById('score').innerHTML = 'Score: ' + score;
+            hideRebirthPopup();
+        }
+
+        function rebirthNo() {
+            hideRebirthPopup();
+        }
+    </script>
+</body>
+</html>
